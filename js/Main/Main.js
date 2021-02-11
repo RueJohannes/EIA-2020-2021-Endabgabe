@@ -2,7 +2,7 @@
 var Firework;
 (function (Firework) {
     window.addEventListener("load", handleLoad);
-    let serverPage = "https://sarahabschlussarbeit.herokuapp.com/"; //"http://localhost:5001/";
+    let serverPage = "https://eia2-2020-2021.herokuapp.com/";
     let form;
     let particleQuantity;
     let particleSize;

@@ -1,0 +1,22 @@
+{
+  "name": "eia2-2020-2021",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node js/Server/Server.js remote"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RueJohannes/EIA-2020-2021-Endabgabe.git"
+  },
+  "author": "Johannes Rümenapp",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RueJohannes/EIA-2020-2021-Endabgabe/issues"
+  },
+  "homepage": "https://github.com/RueJohannes/EIA-2020-2021-Endabgabe#readme",
+  "dependencies": {
+    "@types/node": "^14.14.26"
+  }
+}
