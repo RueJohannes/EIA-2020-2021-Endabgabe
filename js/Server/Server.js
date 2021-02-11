@@ -1,16 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Firework = void 0;
-var Firework;
-(function (Firework) {
-    console.log("test");
-})(Firework = exports.Firework || (exports.Firework = {}));
 const Http = require("http");
 const Url = require("url");
 const Mongo = require("mongodb");
+var Firework;
 (function (Firework) {
     let fireworkCollection;
-    let databaseUrl = "";
+    let databaseUrl = "mongodb+srv://DerPapa:asdfyxcv@eia2-2020-2021-endabgab.a47ra.mongodb.net/EIA2-2020-2021-Endabgabe?retryWrites=true&w=majority";
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;

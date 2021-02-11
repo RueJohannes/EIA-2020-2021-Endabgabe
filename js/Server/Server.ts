@@ -1,7 +1,3 @@
-export namespace Firework {
-    console.log("test");
-}
-
 import * as Http from "http";
 import * as Url from "url";
 import * as Mongo from "mongodb";
@@ -13,7 +9,7 @@ export namespace Firework {
     }
 
     let fireworkCollection: Mongo.Collection;
-    let databaseUrl: string = "";
+    let databaseUrl: string = "mongodb+srv://DerPapa:asdfyxcv@eia2-2020-2021-endabgab.a47ra.mongodb.net/EIA2-2020-2021-Endabgabe?retryWrites=true&w=majority";
     let port: number | string | undefined = process.env.PORT;
     if (port == undefined)
         port = 5001;
