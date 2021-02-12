@@ -33,13 +33,14 @@ namespace Firework {
     inputParticleQuantity.addEventListener("change", startMeter);
     window.setInterval(update, 20);
 
-    backgroundImage.src = "images/wsb_logo_bearbeitet.png";
+    backgroundImage.src = "./images/wsb_logo_bearbeitet.png";
   }
 
   function createObject(_event: MouseEvent): void {
-    let mousePositionX: number = _event.clientX;
-    let mousepositionY: number = _event.clientY;
+    let mousePositionX: number = _event.clientX - crc2.canvas.offsetLeft;
+    let mousepositionY: number = _event.clientY - crc2.canvas.offsetTop;
     let formData: FormData = new FormData(document.forms[0]);
+    
     for (let entry of formData) {
       particleQuantity = Number(formData.get("particleQuantity"));
       particleSize = Number(formData.get("particleSize"));

@@ -31,11 +31,11 @@ var Firework;
         fireworkSaveButton.addEventListener("click", sendDataToServer);
         inputParticleQuantity.addEventListener("change", startMeter);
         window.setInterval(update, 20);
-        backgroundImage.src = "images/wsb_logo_bearbeitet.png";
+        backgroundImage.src = "./images/wsb_logo_bearbeitet.png";
     }
     function createObject(_event) {
-        let mousePositionX = _event.clientX;
-        let mousepositionY = _event.clientY;
+        let mousePositionX = _event.clientX - Firework.crc2.canvas.offsetLeft;
+        let mousepositionY = _event.clientY - Firework.crc2.canvas.offsetTop;
         let formData = new FormData(document.forms[0]);
         for (let entry of formData) {
             particleQuantity = Number(formData.get("particleQuantity"));
