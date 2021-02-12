@@ -93,7 +93,8 @@ namespace Firework {
     let fireworkName: string;
     fireworkName = fireworkSave.value;
     let query: URLSearchParams = new URLSearchParams(<any>userConfigurationData);
-    query.append("fireworkName", fireworkName);
+    console.log(fireworkName);
+    // query.append("fireworkName", fireworkName);
     let response: Response = await fetch(serverPage + "?" + query.toString());
     let responseText: string = await response.text();
     alert("Deine Daten wurden gespeichert");
