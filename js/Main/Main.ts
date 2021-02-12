@@ -33,7 +33,7 @@ namespace Firework {
     inputParticleQuantity.addEventListener("change", startMeter);
     window.setInterval(update, 20);
 
-    backgroundImage.src = "./../images/wsb_logo_bearbeitet.png";
+    backgroundImage.src = "images/wsb_logo_bearbeitet.png";
   }
 
   function createObject(_event: MouseEvent): void {
