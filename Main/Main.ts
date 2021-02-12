@@ -27,10 +27,12 @@ namespace Firework {
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
     let fireworkSaveButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#fireworkSaveButton");
     let inputParticleQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#particleQuantity");
+    let fireworkLoadButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#fireworkLoadButton");
     form = <HTMLFormElement>document.querySelector("form#userConfiguration");
     canvas.addEventListener("mouseup", createObject);
     fireworkSaveButton.addEventListener("click", sendDataToServer);
     inputParticleQuantity.addEventListener("change", startMeter);
+    fireworkLoadButton.addEventListener("click", getDataFromServer);
     window.setInterval(update, 20);
 
     backgroundImage.src = "./images/wsb_logo_bearbeitet.png";
