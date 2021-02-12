@@ -30,7 +30,7 @@ var Firework;
         fireworkSaveButton.addEventListener("click", sendDataToServer);
         inputParticleQuantity.addEventListener("change", startMeter);
         window.setInterval(update, 20);
-        backgroundImage.src = "../../images/wsb_logo_bearbeitet.png";
+        backgroundImage.src = "../images/wsb_logo_bearbeitet.png";
     }
     function createObject(_event) {
         let mousePositionX = _event.clientX;
