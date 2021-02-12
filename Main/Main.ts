@@ -40,7 +40,7 @@ namespace Firework {
     let mousePositionX: number = _event.clientX - crc2.canvas.offsetLeft;
     let mousepositionY: number = _event.clientY - crc2.canvas.offsetTop;
     let formData: FormData = new FormData(document.forms[0]);
-    
+
     for (let entry of formData) {
       particleQuantity = Number(formData.get("particleQuantity"));
       particleSize = Number(formData.get("particleSize"));
@@ -123,7 +123,7 @@ namespace Firework {
   }
 
   function deleteExpandables(): void {
-    for (let index: number = moveables.length - 1; index >= 0; index--) {
+    for (let index: number = 0; index <= moveables.length - 1; index++) {
       if (moveables[index].expendable)
         moveables.splice(index, 1);
     }

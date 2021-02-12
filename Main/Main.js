@@ -114,7 +114,7 @@ var Firework;
         deleteExpandables();
     }
     function deleteExpandables() {
-        for (let index = moveables.length - 1; index >= 0; index--) {
+        for (let index = 0; index <= moveables.length - 1; index++) {
             if (moveables[index].expendable)
                 moveables.splice(index, 1);
         }
