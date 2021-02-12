@@ -69,6 +69,7 @@ var Firework;
         let response = await fetch(serverPage + "?" + "command=getAllDatas");
         let responseContent = await response.text();
         let allDatas = JSON.parse(responseContent);
+        console.log(allDatas);
         let result = allDatas.find(item => item.fireworkName === userValue);
         console.log(result);
         createUserRocket(result);

@@ -74,6 +74,7 @@ namespace Firework {
     let response: Response = await fetch(serverPage + "?" + "command=getAllDatas");
     let responseContent: string = await response.text();
     let allDatas: Rocket[] = JSON.parse(responseContent);
+    console.log(allDatas);
     let result: Rocket | undefined = allDatas.find(item => item.fireworkName === userValue);
     console.log(result);
     createUserRocket(result);
