@@ -18,11 +18,11 @@ namespace Firework {
 
         constructor(_particleSize: number, _position: Vector, _velocity: Vector, _color: string, _glowColor: string, _particleLifetime: number, _type: string) {
             super(_position);
-            this.particleSize = _particleSize;
+            this.particleSize = _particleSize * Math.random();
             this.color = _color;
             this.glowColor = _glowColor;
             this.velocity = _velocity.copy();
-            this.particleLifetime = _particleLifetime;
+            this.particleLifetime = _particleLifetime + Math.random();
             this.type = _type;
         }
 
@@ -44,7 +44,7 @@ namespace Firework {
                     crc2.closePath();
                     crc2.fillStyle = this.color;
                     crc2.shadowColor = this.glowColor;
-                    crc2.shadowBlur = 15;
+                    crc2.shadowBlur = 15 * this.particleSize / 100 + Math.random() * 150;
                     crc2.fill();
                     crc2.restore();
                     console.log(this.type);
@@ -60,7 +60,7 @@ namespace Firework {
                     crc2.closePath();
                     crc2.fillStyle = this.color;
                     crc2.shadowColor = this.glowColor;
-                    crc2.shadowBlur = 15;
+                    crc2.shadowBlur = 15 * this.particleSize / 100 + Math.random() * 150;
                     crc2.fill();
                     crc2.restore();
                     console.log(this.type);
@@ -74,7 +74,7 @@ namespace Firework {
                     crc2.closePath();
                     crc2.fillStyle = this.color;
                     crc2.shadowColor = this.glowColor;
-                    crc2.shadowBlur = 15;
+                    crc2.shadowBlur = 15 * this.particleSize / 100 + Math.random() * 150;
                     crc2.fill();
                     crc2.restore();
                     console.log(this.type);
@@ -90,7 +90,7 @@ namespace Firework {
                     crc2.closePath();
                     crc2.fillStyle = this.color;
                     crc2.shadowColor = this.glowColor;
-                    crc2.shadowBlur = 15;
+                    crc2.shadowBlur = 15 * this.particleSize / 100 + Math.random() * 150;
                     crc2.fill();
                     crc2.restore();
                     console.log(this.type);
@@ -102,7 +102,7 @@ namespace Firework {
                     crc2.ellipse(-21 * this.particleSize / 100, 21 * this.particleSize / 100, 7 * this.particleSize / 100, 35 * this.particleSize / 100, Math.PI / 4, 0, 2 * Math.PI);
                     crc2.fillStyle = this.color;
                     crc2.shadowColor = this.glowColor;
-                    crc2.shadowBlur = 25 * this.particleSize / 100;
+                    crc2.shadowBlur = 25 * this.particleSize / 100 + Math.random() * 150;
                     crc2.closePath();
                     crc2.fill();
                     crc2.drawImage(imageGME, -50 * this.particleSize / 100, -50 * this.particleSize / 100, this.particleSize, this.particleSize);

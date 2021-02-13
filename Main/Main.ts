@@ -70,13 +70,12 @@ namespace Firework {
 
   export async function getDataFromServer(_event: Event): Promise<void> {
     console.log("Datein wurden geladen");
-    let target: HTMLInputElement = <HTMLInputElement>_event.target;
+    let target: HTMLInputElement = <HTMLInputElement>document.getElementById("LodedTitels");
     let userValue: string;
     userValue = target.value;
     let response: Response = await fetch(serverPage + "?" + "command=getAllDatas");
     let responseContent: string = await response.text();
     let allDatas: Rocket[] = JSON.parse(responseContent);
-    console.log(allDatas);
     let result: Rocket | undefined = allDatas.find(item => item.fireworkName === userValue);
     console.log(result);
     createUserRocket(result);
@@ -87,6 +86,35 @@ namespace Firework {
     let particleLifetime: number | undefined = _result?.particleLifetime;
     let type: string | undefined = _result?.particleShape;
     console.log(color, particleLifetime, type);
+
+    let form: HTMLCollectionOf<HTMLFormElement> = document.getElementsByTagName("form");
+
+    for (let i: number = 0; i < form[0].elements.length; i++) {
+      if (form[0].elements[i].id == "particleQuantity") {
+        let particleQuantity: HTMLInputElement = <HTMLInputElement>document.getElementById("particleQuantity");
+        particleQuantity.value = <string>color;
+      }
+      if (form[0].elements[i].id == "particleSize") {
+        let particleSize: HTMLInputElement = <HTMLInputElement>document.getElementById("particleSize");
+        particleSize.value = <string>color;
+      }
+      if (form[0].elements[i].id == "particleLifetime") {
+        let particleLifetime: HTMLInputElement = <HTMLInputElement>document.getElementById("particleLifetime");
+        particleLifetime.value = <string>color;
+      }
+      if (form[0].elements[i].id == "particleShape") {
+        let particleShape: HTMLInputElement = <HTMLInputElement>document.getElementById("particleShape");
+        particleShape.value = <string>color;
+      }
+      if (form[0].elements[i].id == "particleColor") {
+        let particleColor: HTMLInputElement = <HTMLInputElement>document.getElementById("particleColor");
+        particleColor.value = <string>color;
+      }
+      if (form[0].elements[i].id == "glowColor") {
+        let glowColor: HTMLInputElement = <HTMLInputElement>document.getElementById("glowColor");
+        glowColor.value = <string>color;
+      }
+    }
   }
 
   async function sendDataToServer(_event: Event): Promise<void> {
@@ -138,65 +166,4 @@ namespace Firework {
     let meter: HTMLMeterElement = <HTMLMeterElement>document.querySelector("meter");
     meter.value = parseFloat(target.value);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
