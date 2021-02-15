@@ -26,12 +26,10 @@ var Firework;
             return;
         Firework.crc2 = canvas.getContext("2d");
         let fireworkSaveButton = document.querySelector("button#fireworkSaveButton");
-        let inputQuantity = document.querySelector("input#quantity");
         let fireworkLoadButton = document.querySelector("button#fireworkLoadButton");
         form = document.querySelector("form#userConfiguration");
         canvas.addEventListener("mouseup", createObject);
         fireworkSaveButton.addEventListener("click", sendDataToServer);
-        inputQuantity.addEventListener("change", startMeter);
         fireworkLoadButton.addEventListener("click", getDataFromServer);
         window.setInterval(update, 20);
         backgroundImage.src = "./images/wsb_logo_bearbeitet.png";
@@ -67,8 +65,7 @@ var Firework;
     async function getDataFromServer(_event) {
         console.log("Datein wurden geladen");
         let target = document.getElementById("LodedTitels");
-        let userValue;
-        userValue = target.value;
+        let userValue = target.value;
         let response = await fetch(serverPage + "?" + "command=getAllDatas");
         let responseContent = await response.text();
         let allDatas = JSON.parse(responseContent);
@@ -127,12 +124,22 @@ var Firework;
     function createParticle(_quantity, _size, _mousePositionX, _mousePositionY, _color, _luminance, _duration, _type) {
         let origin = new Firework.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
+        let radian = (Math.PI * 2) / _quantity;
         for (let i = 0; i < _quantity; i++) {
-            let radian = (Math.PI * 2) / _quantity;
-            let px = Math.cos(radian * i) * 110 * Math.random() * 2;
-            let py = Math.sin(radian * i) * 110 * Math.random() * 2;
-            let velocity = new Firework.Vector(px, py);
-            let particle = new Firework.Particle(size, origin, velocity, color, luminance, duration, type);
+            let px;
+            let py;
+            let velocity;
+            let particle;
+            if (i % 2 == 0) {
+                px = Math.cos(radian * i) * 150 + Math.random() * 20;
+                py = Math.sin(radian * i) * 150 + Math.random() * 20;
+            }
+            else {
+                px = Math.cos(radian * i) * 110 * Math.random() * 2;
+                py = Math.sin(radian * i) * 110 * Math.random() * 2;
+            }
+            velocity = new Firework.Vector(px, py);
+            particle = new Firework.Particle(size, origin, velocity, color, luminance, duration, type);
             moveables.push(particle);
         }
     }
@@ -149,11 +156,6 @@ var Firework;
             if (moveables[index].expendable)
                 moveables.splice(index, 1);
         }
-    }
-    function startMeter(_event) {
-        let target = _event.target;
-        let meter = document.querySelector("meter");
-        meter.value = parseFloat(target.value);
     }
 })(Firework || (Firework = {}));
 //# sourceMappingURL=Main.js.map

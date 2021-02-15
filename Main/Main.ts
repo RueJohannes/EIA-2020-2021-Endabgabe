@@ -27,12 +27,10 @@ namespace Firework {
       return;
     crc2 = <CanvasRenderingContext2D>canvas.getContext("2d");
     let fireworkSaveButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#fireworkSaveButton");
-    let inputQuantity: HTMLButtonElement = <HTMLButtonElement>document.querySelector("input#quantity");
     let fireworkLoadButton: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#fireworkLoadButton");
     form = <HTMLFormElement>document.querySelector("form#userConfiguration");
     canvas.addEventListener("mouseup", createObject);
     fireworkSaveButton.addEventListener("click", sendDataToServer);
-    inputQuantity.addEventListener("change", startMeter);
     fireworkLoadButton.addEventListener("click", getDataFromServer);
     window.setInterval(update, 20);
 
@@ -72,8 +70,7 @@ namespace Firework {
   export async function getDataFromServer(_event: Event): Promise<void> {
     console.log("Datein wurden geladen");
     let target: HTMLInputElement = <HTMLInputElement>document.getElementById("LodedTitels");
-    let userValue: string;
-    userValue = target.value;
+    let userValue: string = target.value;
     let response: Response = await fetch(serverPage + "?" + "command=getAllDatas");
     let responseContent: string = await response.text();
     let allDatas: Rocket[] = JSON.parse(responseContent);
@@ -136,15 +133,26 @@ namespace Firework {
   function createParticle(_quantity: number, _size: number, _mousePositionX: number, _mousePositionY: number, _color: string, _luminance: string, _duration: number, _type: string): void {
     let origin: Vector = new Vector(_mousePositionX, _mousePositionY);
     let color: string = _color;
+    let radian: number = (Math.PI * 2) / _quantity;
     for (let i: number = 0; i < _quantity; i++) {
-      let radian: number = (Math.PI * 2) / _quantity;
-      let px: number = Math.cos(radian * i) * 110 * Math.random() * 2;
-      let py: number = Math.sin(radian * i) * 110 * Math.random() * 2;
-      let velocity: Vector = new Vector(px, py);
-      let particle: MoveableObject = new Particle(size, origin, velocity, color, luminance, duration, type);
+      let px: number;
+      let py: number;
+      let velocity: Vector;
+      let particle: MoveableObject;
+      if (i % 2 == 0) {
+        px = Math.cos(radian * i) * 150 + Math.random() * 20;
+        py = Math.sin(radian * i) * 150 + Math.random() * 20;
+      }
+      else {
+        px = Math.cos(radian * i) * 110 * Math.random() * 2;
+        py = Math.sin(radian * i) * 110 * Math.random() * 2;
+      }
+      velocity = new Vector(px, py);
+      particle = new Particle(size, origin, velocity, color, luminance, duration, type);
       moveables.push(particle);
     }
   }
+
 
   function update(): void {
     crc2.drawImage(backgroundImage, 0, 0, canvas.width, canvas.height);
@@ -160,11 +168,5 @@ namespace Firework {
       if (moveables[index].expendable)
         moveables.splice(index, 1);
     }
-  }
-
-  function startMeter(_event: Event): void {
-    let target: HTMLInputElement = <HTMLInputElement>_event.target;
-    let meter: HTMLMeterElement = <HTMLMeterElement>document.querySelector("meter");
-    meter.value = parseFloat(target.value);
   }
 }
