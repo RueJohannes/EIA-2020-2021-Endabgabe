@@ -2,9 +2,9 @@ namespace Firework {
 
     export interface Rocket {
         fireworkName: string;
-        particleLifetime: number;
+        duration: number;
         particleColor: string;
-        particleShape: string;
+        shape: string;
        }
 
     export function generateContent(_titelList: Rocket[]): void {
