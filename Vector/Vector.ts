@@ -8,7 +8,7 @@ namespace Firework {
             this.set(_x, _y);
         }
 
-       public set(_x: number, _y: number): void {
+        public set(_x: number, _y: number): void {
             this.x = _x;
             this.y = _y;
         }
@@ -23,64 +23,9 @@ namespace Firework {
             this.y += _addend.y;
         }
 
-        public  copy(): Vector {
+        public copy(): Vector {
             return new Vector(this.x, this.y);
 
         }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

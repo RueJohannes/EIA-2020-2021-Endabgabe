@@ -4,12 +4,13 @@ var Firework;
     window.addEventListener("load", handleLoad);
     // let serverPage: string = "http://localhost:5001";
     let serverPage = "https://eia2-2020-2021.herokuapp.com/";
+    // let serverPage: string = "eia2-endabgabe-sh.herokuapp.com/";
     let form;
-    let particleQuantity;
-    let particleSize;
+    let quantity;
+    let size;
     let color;
-    let particleLifetime;
-    let glowColor;
+    let duration;
+    let luminance;
     let type;
     let moveables = [];
     let canvas;
@@ -25,12 +26,12 @@ var Firework;
             return;
         Firework.crc2 = canvas.getContext("2d");
         let fireworkSaveButton = document.querySelector("button#fireworkSaveButton");
-        let inputParticleQuantity = document.querySelector("input#particleQuantity");
+        let inputQuantity = document.querySelector("input#quantity");
         let fireworkLoadButton = document.querySelector("button#fireworkLoadButton");
         form = document.querySelector("form#userConfiguration");
         canvas.addEventListener("mouseup", createObject);
         fireworkSaveButton.addEventListener("click", sendDataToServer);
-        inputParticleQuantity.addEventListener("change", startMeter);
+        inputQuantity.addEventListener("change", startMeter);
         fireworkLoadButton.addEventListener("click", getDataFromServer);
         window.setInterval(update, 20);
         backgroundImage.src = "./images/wsb_logo_bearbeitet.png";
@@ -40,11 +41,11 @@ var Firework;
         let mousepositionY = _event.clientY - Firework.crc2.canvas.offsetTop;
         let formData = new FormData(document.forms[0]);
         for (let entry of formData) {
-            particleQuantity = Number(formData.get("particleQuantity"));
-            particleSize = Number(formData.get("particleSize"));
-            particleLifetime = Number(formData.get("particleLifetime"));
+            quantity = Number(formData.get("quantity"));
+            size = Number(formData.get("size"));
+            duration = Number(formData.get("duration"));
             color = String(formData.get("particleColor"));
-            glowColor = String(formData.get("glowColor"));
+            luminance = String(formData.get("luminance"));
             switch (entry[1]) {
                 case "circle":
                     type = "circle";
@@ -60,7 +61,7 @@ var Firework;
                     break;
             }
         }
-        createParticle(particleQuantity, particleSize, mousePositionX, mousepositionY, color, glowColor, particleLifetime, type);
+        createParticle(quantity, size, mousePositionX, mousepositionY, color, luminance, duration, type);
         console.log(type);
     }
     async function getDataFromServer(_event) {
@@ -78,35 +79,35 @@ var Firework;
     Firework.getDataFromServer = getDataFromServer;
     function createUserRocket(_result) {
         let color = _result?.particleColor;
-        let particleLifetime = _result?.particleLifetime;
-        let type = _result?.particleShape;
-        console.log(color, particleLifetime, type);
+        let duration = _result?.duration;
+        let type = _result?.shape;
+        console.log(color, duration, type);
         let form = document.getElementsByTagName("form");
         for (let i = 0; i < form[0].elements.length; i++) {
-            if (form[0].elements[i].id == "particleQuantity") {
-                let particleQuantity = document.getElementById("particleQuantity");
-                particleQuantity.value = color;
-            }
-            if (form[0].elements[i].id == "particleSize") {
-                let particleSize = document.getElementById("particleSize");
-                particleSize.value = color;
-            }
-            if (form[0].elements[i].id == "particleLifetime") {
-                let particleLifetime = document.getElementById("particleLifetime");
-                particleLifetime.value = color;
-            }
-            if (form[0].elements[i].id == "particleShape") {
-                let particleShape = document.getElementById("particleShape");
-                particleShape.value = color;
-            }
+            // if (form[0].elements[i].id == "quantity") {
+            //   let quantity: HTMLInputElement = <HTMLInputElement>document.getElementById("quantity");
+            //   quantity.value = <string>color;
+            // }
+            // if (form[0].elements[i].id == "size") {
+            //   let size: HTMLInputElement = <HTMLInputElement>document.getElementById("size");
+            //   size.value = <string>color;
+            // }
+            // if (form[0].elements[i].id == "duration") {
+            //   let duration: HTMLInputElement = <HTMLInputElement>document.getElementById("duration");
+            //   duration.value = <string>color;
+            // }
+            // if (form[0].elements[i].id == "shape") {
+            //   let shape: HTMLInputElement = <HTMLInputElement>document.getElementById("shape");
+            //   shape.value = <string>color;
+            // }
             if (form[0].elements[i].id == "particleColor") {
                 let particleColor = document.getElementById("particleColor");
                 particleColor.value = color;
             }
-            if (form[0].elements[i].id == "glowColor") {
-                let glowColor = document.getElementById("glowColor");
-                glowColor.value = color;
-            }
+            // if (form[0].elements[i].id == "luminance") {
+            //   let luminance: HTMLInputElement = <HTMLInputElement>document.getElementById("luminance");
+            //   luminance.value = <string>color;
+            // }
         }
     }
     async function sendDataToServer(_event) {
@@ -123,15 +124,15 @@ var Firework;
         console.log("Daten geschickt: ", responseText);
         fireworkSave.value = "";
     }
-    function createParticle(_particleQuantity, _particleSize, _mousePositionX, _mousePositionY, _color, _glowColor, _particleLifetime, _type) {
+    function createParticle(_quantity, _size, _mousePositionX, _mousePositionY, _color, _luminance, _duration, _type) {
         let origin = new Firework.Vector(_mousePositionX, _mousePositionY);
         let color = _color;
-        for (let i = 0; i < _particleQuantity; i++) {
-            let radian = (Math.PI * 2) / _particleQuantity;
+        for (let i = 0; i < _quantity; i++) {
+            let radian = (Math.PI * 2) / _quantity;
             let px = Math.cos(radian * i) * 110 * Math.random() * 2;
             let py = Math.sin(radian * i) * 110 * Math.random() * 2;
             let velocity = new Firework.Vector(px, py);
-            let particle = new Firework.Particle(particleSize, origin, velocity, color, glowColor, particleLifetime, type);
+            let particle = new Firework.Particle(size, origin, velocity, color, luminance, duration, type);
             moveables.push(particle);
         }
     }
