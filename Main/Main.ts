@@ -15,7 +15,7 @@ namespace Firework {
   export let crc2: CanvasRenderingContext2D;
 
   async function handleLoad(_event: Event): Promise<void> {
-    console.log("Moin");
+    console.log("BUY BITCOIN");
     let response: Response = await fetch(serverPage + "?" + "command=getTitels");
     let listOfTitels: string = await response.text();
     let titelList: Rocket[] = JSON.parse(listOfTitels);
