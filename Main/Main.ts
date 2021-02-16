@@ -2,7 +2,6 @@ namespace Firework {
   window.addEventListener("load", handleLoad);
   // let serverPage: string = "http://localhost:5001";
   let serverPage: string = "https://eia2-2020-2021.herokuapp.com/";
-  // let serverPage: string = "eia2-endabgabe-sh.herokuapp.com/";
   let form: HTMLFormElement;
   let quantity: number;
   let size: number;
@@ -118,8 +117,7 @@ namespace Firework {
   async function sendDataToServer(_event: Event): Promise<void> {
     let userConfigurationData: FormData = new FormData(form);
     let fireworkSave: HTMLInputElement = <HTMLInputElement>document.querySelector("input#fireworkSave");
-    let fireworkName: string;
-    fireworkName = fireworkSave.value;
+    let fireworkName: string = fireworkSave.value;
     let query: URLSearchParams = new URLSearchParams(<any>userConfigurationData);
     console.log(fireworkName);
     // query.append("fireworkName", fireworkName);

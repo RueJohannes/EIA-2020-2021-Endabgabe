@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap%27');
 
 body {
-    background-color: rgb(146, 146, 146);
-    color: white;
+    background-color: black;
+    color: black;
     font-family: 'Poppins', sans-serif;
     display: flex;
     flex-direction: row;
@@ -12,7 +12,8 @@ body {
 
   
 #settings {
-    background-color: #fdc611ad;
+    background-color: #cfb027;
+    border: solid #cfb027;
     height: 720px;
     padding: 0 2em;
     margin: 1em;
@@ -37,4 +38,7 @@ button:hover{
 
 h1 {
     text-align: center;
+}
+canvas {
+    border: solid #cfb027;
 }
